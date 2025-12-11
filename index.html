@@ -1,69 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Counselor Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TapOut! - Counselor Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #FFFCF5; /* Page background color */
+      color: #333;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    /* Header buttons */
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Main content */
+    main {
+      padding: 20px;
+    }
+  </style>
 </head>
-
 <body>
-
-    <!-- HEADER -->
-    <header class="main-header">
-        <h1>Tap Out – Counselor Dashboard</h1>
-    </header>
-
-    <div class="container">
-
-        <!-- LEFT SIDEBAR -->
-        <aside class="sidebar">
-            <div class="top-bar">
-                <button class="btn">Sign In</button>
-                <button class="btn">Open Calendar</button>
-            </div>
-        </aside>
-
-        <!-- MAIN DASHBOARD -->
-        <main class="dashboard">
-
-            <!-- Crisis -->
-            <div class="urgency-row">
-                <div class="face red-face">
-                    <div class="eyes"></div>
-                    <div class="mouth sad"></div>
-                </div>
-            </div>
-
-            <!-- Moderate -->
-            <div class="urgency-row">
-                <div class="face orange-face">
-                    <div class="eyes"></div>
-                    <div class="mouth sad"></div>
-                </div>
-            </div>
-
-            <!-- Mild -->
-            <div class="urgency-row">
-                <div class="face yellow-face">
-                    <div class="eyes"></div>
-                    <div class="mouth neutral"></div>
-                </div>
-            </div>
-
-            <!-- Unurgent -->
-            <div class="urgency-row">
-                <div class="face green-face">
-                    <div class="eyes"></div>
-                    <div class="mouth happy"></div>
-                </div>
-            </div>
-
-        </main>
-
+  <header>
+    <h1>TapOut! - Counselor Dashboard</h1>
+    <div class="header-buttons">
+      <button id="openCalendar">Open Calendar</button>
+      <button id="signIn">Sign In</button>
     </div>
+  </header>
 
-<script src="script.js"></script>
+  <main>
+    <h2>Welcome to your dashboard</h2>
+    <p>All content is now full width (no sidebar).</p>
+  </main>
 
+  <script>
+    document.getElementById('openCalendar').addEventListener('click', function() {
+      alert('Calendar opens!');
+      // Replace with actual calendar functionality
+    });
+
+    document.getElementById('signIn').addEventListener('click', function() {
+      alert('Sign In clicked!');
+      // Replace with actual sign in functionality
+    });
+  </script>
 </body>
 </html>
