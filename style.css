@@ -156,6 +156,11 @@ body {
 
 /* Green: simple smile (:) style) */
 .green-face .mouth {
+    width: 40px;
+    height: 6px;
+    border-radius: 0;
+    border: none;
+    background: #333;
     border-top: none;
     border-bottom: 5px solid #333;
     background: transparent;
