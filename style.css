@@ -1,92 +1,143 @@
-body {
-  margin: 0;
-  font-family: sans-serif;
-  text-align: center;
-  background: #85082d; /* sky blue background */
-  overflow-x: hidden;
+:root{
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --danger: #dc2626;
+  --radius: 10px;
+  --container-width: 1100px;
+  --shadow: 0 6px 18px rgba(16,24,40,0.06);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
 }
 
-/* A fixed container the same size as your Canva design */
-.page {
-  display: none;
-  position: relative;
-  width: 1366px;   /* set to the exact width of your Canva screenshot */
-  height: 768px;   /* set to the exact height of your Canva screenshot */
-  margin: 0 auto;  /* keeps it centered */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
 }
 
-.page img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1366px;
-  height: 768px;
+.container{
+  max-width:var(--container-width);
+  margin:0 auto;
+  padding:20px;
 }
 
-.page.active {
-  display: block;
+.site-header{
+  background:linear-gradient(90deg,#ffffff 0%, #f8fafc 100%);
+  border-bottom:1px solid #e6eef8;
+  position:sticky;
+  top:0;
+  z-index:50;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.brand{margin:0;font-size:1.25rem;letter-spacing:0.2px}
+
+.top-nav .btn{font-size:0.9rem}
+
+/* Controls */
+.controls{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin:18px 0;
 }
 
-/* Hotspot (invisible buttons) */
-.hotspot {
-  position: absolute;
-  background: rgba(255, 0, 0, 0); /* invisible */
-  border: none;
-  cursor: pointer;
+/* Grid layout for urgency groups */
+.grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-bottom:40px;
 }
 
+/* Card */
+.card{
+  background:var(--card);
+  padding:16px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border:1px solid rgba(15,23,42,0.03);
+}
+.card h4{margin:0 0 8px 0;font-size:1rem}
+.card .count{font-weight:600;color:var(--accent)}
 
-/* Example positions for Page 1 (adjust as needed) */
-.academic { top: 195px; left: 110px; width: 190px; height: 100px; }
-.anxiety { top: 220px; left: 410px; width: 190px; height: 100px; }
-.depression { top: 240px; left: 760px; width: 190px; height: 100px; }
-.family { top: 250px; left: 1130px; width: 190px; height: 100px; }
+/* Request item */
+.request{
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #eef2ff;
+  margin-bottom:10px;
+  cursor:pointer;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+}
+.request:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(16,24,40,0.06)}
+.request .meta{font-size:0.9rem;color:var(--muted)}
+.request .urgency.high{color:var(--danger);font-weight:700}
+.request .urgency.medium{color:#f97316;font-weight:700}
+.request .urgency.low{color:#059669;font-weight:700}
 
-.relationship { top: 550px; left: 80px; width: 200px; height: 100px; }
-.bullying { top: 560px; left: 420px; width: 190px; height: 100px; }
-.talk { top: 570px; left: 780px; width: 190px; height: 100px; }
-.unsure { top: 520px; left: 1140px; width: 190px; height: 100px; }
-
-/* Page 2 buttons */
-.fine { top: 310px; left: 90px; width: 200px; height: 180px; }
-.littleoff { top: 310px; left: 460px; width: 200px; height: 180px; }
-.coping { top: 310px; left: 810px; width: 200px; height: 180px; }
-.crisis { top: 310px; left: 1160px; width: 200px; height: 180px; }
-
-/* Page 3 buttons (visible email buttons) */
-.counselor1, .counselor2, .counselor3, .counselor4, .counselor5, .counselor6 {
-  position: absolute;
-  left: 650px;
-  width: 200px;
-  height: 50px;
-  background: white;
-  border: 2px solid #000;
-  border-radius: 25px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
+/* Buttons */
+.btn{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid rgba(0,0,0,0.06);
+  background:transparent;
+  cursor:pointer;
+  font-size:0.9rem;
+}
+.btn.primary{
+  background:var(--accent);
+  color:white;
+  border:none;
+}
+.btn.ghost{
+  background:transparent;
 }
 
-/* Counselor grid (2 columns × 3 rows) */
-.counselor-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  position: absolute;
-  top: 275px;   /* adjust to match your white bubbles */
-  left: 500px;  /* adjust to center on your template */
-  width: 800px; /* total width for two columns */
+/* Modal */
+.modal{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
 }
-
-.counselor-grid button {
-  padding: 15px;
-  background: white;
-  border: 2px solid #000;
-  border-radius: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100%;   /* each button fills its grid cell */
-  height: 60px;
+.modal[aria-hidden="false"]{display:flex}
+.modal-backdrop{
+  position:absolute;inset:0;background:rgba(7,12,20,0.45);backdrop-filter:blur(2px);
 }
+.modal-panel{
+  position:relative;
+  max-width:720px;
+  width:100%;
+  background:var(--card);
+  border-radius:12px;
+  overflow:hidden;
+  z-index:2;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.2);
+}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #eef2ff}
+.modal-body{padding:18px}
+.modal-footer{display:flex;gap:8px;padding:12px 18px;border-top:1px solid #eef2ff;justify-content:flex-end}
 
+/* Footer */
+.site-footer{padding:18px 0;color:var(--muted);text-align:center;border-top:1px solid #f0f4f8;background:transparent}
+
+/* Responsive */
+@media (max-width:640px){
+  .controls{flex-wrap:wrap}
+  .header-inner{padding:8px 0}
+}
