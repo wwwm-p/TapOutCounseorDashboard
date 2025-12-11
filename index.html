@@ -1,67 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tap Out — Counselor Dashboard (Template)</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counselor Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="brand">Tap Out</h1>
-      <nav class="top-nav" aria-label="Main navigation">
-        <button id="signInBtn" class="btn">Sign in</button>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <section class="intro">
-      <h2>Dashboard</h2>
-      <p class="muted">Basic outline for counselor dashboard — placeholder content for layout.</p>
-    </section>
-
-    <section class="controls">
-      <label for="filterSelect">Filter:</label>
-      <select id="filterSelect">
-        <option value="all">All</option>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
-      </select>
-      <a id="calendarLink" class="btn ghost" href="#" title="Open calendar">Open calendar</a>
-    </section>
-
-    <section class="grid" id="requestsGrid" aria-live="polite">
-      <!-- JS will render urgency groups here -->
-    </section>
-  </main>
-
-  <!-- Email preview modal (hidden by default) -->
-  <div id="emailModal" class="modal" role="dialog" aria-hidden="true" aria-labelledby="modalTitle">
-    <div class="modal-panel">
-      <header class="modal-header">
-        <h3 id="modalTitle">Request Preview</h3>
-        <button id="closeModal" class="icon-btn" aria-label="Close">✕</button>
-      </header>
-      <div class="modal-body" id="modalBody">
-        <!-- content injected by JS -->
-      </div>
-      <footer class="modal-footer">
-        <button id="scheduleBtn" class="btn">Schedule</button>
-        <button id="sendBtn" class="btn primary">Send Email</button>
-      </footer>
-    </div>
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-  </div>
-
-  <footer class="site-footer">
     <div class="container">
-      <small>© <span id="year"></span> Tap Out — Template</small>
-    </div>
-  </footer>
 
-  <script src="script.js"></script>
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="top-bar">
+                <button class="btn">Sign In</button>
+                <button class="btn">Open Calendar</button>
+            </div>
+        </aside>
+
+        <!-- MAIN DASHBOARD -->
+        <main class="dashboard">
+
+            <!-- Crisis -->
+            <div class="urgency-row crisis">
+                <div class="icon red"></div>
+                <div class="row-content">
+                    <h3>Crisis (Red)</h3>
+                    <p>Items will appear here...</p>
+                </div>
+            </div>
+
+            <!-- Moderate -->
+            <div class="urgency-row moderate">
+                <div class="icon orange"></div>
+                <div class="row-content">
+                    <h3>Moderate (Orange)</h3>
+                    <p>Items will appear here...</p>
+                </div>
+            </div>
+
+            <!-- Mild -->
+            <div class="urgency-row mild">
+                <div class="icon yellow"></div>
+                <div class="row-content">
+                    <h3>Mild (Yellow)</h3>
+                    <p>Items will appear here...</p>
+                </div>
+            </div>
+
+            <!-- Unurgent -->
+            <div class="urgency-row unurgent">
+                <div class="icon green"></div>
+                <div class="row-content">
+                    <h3>Unurgent (Green)</h3>
+                    <p>Items will appear here...</p>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
