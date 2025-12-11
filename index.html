@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Support</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Make it behave properly when opened from QR/barcode on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body>
+  <!-- Page 1 -->
+  <div class="page active" id="page1">
+    <img src="page1.png" alt="Welcome Page" />
+
+    <button class="hotspot academic" onclick="chooseReason('Academic stress or pressure')"></button>
+    <button class="hotspot anxiety" onclick="chooseReason('Anxiety or panic attacks')"></button>
+    <button class="hotspot depression" onclick="chooseReason('Depression or sadness')"></button>
+    <button class="hotspot family" onclick="chooseReason('Family issues or home stress')"></button>
+    <button class="hotspot relationship" onclick="chooseReason('Relationship or friendship problems')"></button>
+    <button class="hotspot bullying" onclick="chooseReason('Bullying or harassment')"></button>
+    <button class="hotspot talk" onclick="chooseReason('I just need someone to talk to')"></button>
+    <button class="hotspot unsure" onclick="chooseReason('I’m not ready to say')"></button>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page" id="page2">
+    <img src="page2.png" alt="Urgency Page" />
+
+    <button class="hotspot fine" onclick="chooseUrgency('I’m Doing Fine – Just Curious')"></button>
+    <button class="hotspot littleoff" onclick="chooseUrgency('Feeling a Little Off')"></button>
+    <button class="hotspot coping" onclick="chooseUrgency('I’m Not Coping Well')"></button>
+    <button class="hotspot crisis" onclick="chooseUrgency('I’m in Crisis')"></button>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="page" id="page3">
+    <img src="page3.png" alt="Counselor Page" />
+
+    <div class="counselor-grid">
+      <button onclick="sendEmail('dtansey@smpanthers.org')">dtansey@smpanthers.org</button>
+      <button onclick="sendEmail('kmcconnell@smpanthers.org')">kmcconnell@smpanthers.org</button>
+      <button onclick="sendEmail('gsorbi@smpanthers.org')">gsorbi@smpanthers.org</button>
+      <button onclick="sendEmail('apanlilio@smpanthers.org')">apanlilio@smpanthers.org</button>
+      <button onclick="sendEmail('aturner@smpanthers.org')">aturner@smpanthers.org</button>
+      <button onclick="sendEmail('cfilson@smpanthers.org')">cfilson@smpanthers.org</button>
+    </div>
+  </div>
+
+  <!-- fallback box -->
+  <div id="popupFallback" style="display:none; margin:18px 12px; padding:12px; border-radius:8px; background:#fff3f3; color:#a00;"></div>
+
+  <script>
+    let selectedReason = "";
+    let selectedUrgency = "";
+
+    function goToPage(pageId) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+    }
+
+    function chooseReason(reason) {
+      selectedReason = reason;
+      goToPage("page2");
+    }
+
+    function chooseUrgency(level) {
+      selectedUrgency = level;
+      goToPage("page3");
+    }
+
+    function sendEmail(counselorEmail) {
+      const reason = selectedReason || "I need academic or personal support.";
+      const urgency = selectedUrgency || "Moderate";
+      const subject = "Support Request from Student";
+      const body = `Hello,\n\nI would like to reach out for support.\n\nReason: ${reason}\nUrgency: ${urgency}\n\nThank you,\n[YOUR NAME AND GRADE]`;
+
+      const gmailUrl = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to=${encodeURIComponent(
+        counselorEmail
+      )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      const fallbackEl = document.getElementById("popupFallback");
+      fallbackEl.style.display = "none";
+      fallbackEl.innerHTML = "";
+
+      let popup = null;
+      try {
+        popup = window.open(gmailUrl, "_blank", "noopener,noreferrer");
+      } catch {
+        popup = null;
+      }
+
+      if (popup && !popup.closed) {
+        popup.focus?.();
+        return;
+      }
+
+      // fallback UI
+      fallbackEl.style.display = "block";
+      fallbackEl.innerHTML = `
+        <p>Popups are blocked or this environment prevented opening Gmail automatically.</p>
+        <p><strong>Options:</strong></p>
+        <ul style="margin-left:18px;">
+          <li>Tap "Open Gmail" below to open Gmail manually.</li>
+          <li>If using QR, open this site in Safari or Chrome, not inside another app.</li>
+        </ul>
+        <div style="margin-top:10px;">
+          <a href="${gmailUrl}" target="_blank" rel="noopener noreferrer" style="background:#d33;color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;">Open Gmail</a>
+          <button id="sameTabBtn" style="margin-left:8px;padding:10px 14px;border:1px solid #ccc;border-radius:6px;background:#fff;">Open in Same Tab</button>
+        </div>
+      `;
+
+      const sameTabBtn = document.getElementById("sameTabBtn");
+      if (sameTabBtn) {
+        sameTabBtn.addEventListener("click", () => {
+          window.location.href = gmailUrl;
+        });
+      }
+    }
+  </script>
+</body>
+</html>
