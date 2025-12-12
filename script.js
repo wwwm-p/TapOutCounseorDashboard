@@ -24,3 +24,4 @@ document.getElementById("mildRow").addEventListener("click", () => {
 document.getElementById("unurgentRow").addEventListener("click", () => {
     alert("Unurgent row clicked.");
 });
+
