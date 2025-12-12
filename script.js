@@ -1,30 +1,24 @@
-// ----------------------
-// SIMULATED STUDENT DATA
-// ----------------------
 let students = [
-    { name: "Alice Johnson", grade: 12, email: "alice.johnson@school.org", notes: [] },
-    { name: "Michael Smith", grade: 10, email: "michael.smith@school.org", notes: [] },
-    { name: "Brian Lee", grade: 11, email: "brian.lee@school.org", notes: [] },
-    { name: "Sofia Martinez", grade: 9, email: "sofia.martinez@school.org", notes: [] }
+    { name: "Alice Johnson", grade: 12, email: "alice.johnson@school.org" },
+    { name: "Michael Smith", grade: 10, email: "michael.smith@school.org" },
+    { name: "Brian Lee", grade: 11, email: "brian.lee@school.org" },
+    { name: "Sofia Martinez", grade: 9, email: "sofia.martinez@school.org" }
 ];
-
-// Load stored notes from localStorage
-if (localStorage.getItem("studentNotes")) {
-    let saved = JSON.parse(localStorage.getItem("studentNotes"));
-    students.forEach(stu => {
-        if (saved[stu.email]) stu.notes = saved[stu.email];
-    });
-}
 
 let selectedStudent = null;
 
+// Load notes
+let notes = JSON.parse(localStorage.getItem("notesData") || "[]");
 
-// ----------------------
-// STUDENT PANEL FUNCTIONS
-// ----------------------
 function toggleStudentsPanel() {
     document.getElementById("studentsPanel").classList.toggle("hidden");
+    document.getElementById("notesPanel").classList.add("hidden");
     renderStudentList();
+}
+
+function toggleNotesPanel() {
+    document.getElementById("notesPanel").classList.toggle("hidden");
+    loadNotes();
 }
 
 function renderStudentList() {
@@ -34,86 +28,64 @@ function renderStudentList() {
 
     let filtered = students.filter(s => s.name.toLowerCase().includes(query));
 
-    if (sort === "alpha") {
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-    } else {
-        filtered.sort((a, b) => a.grade - b.grade);
-    }
+    if (sort === "alpha") filtered.sort((a, b) => a.name.localeCompare(b.name));
+    else filtered.sort((a, b) => a.grade - b.grade);
 
     list.innerHTML = "";
 
     filtered.forEach(stu => {
         let li = document.createElement("li");
-        li.textContent = stu.name + " (Grade " + stu.grade + ")";
+        li.textContent = `${stu.name} (Grade ${stu.grade})`;
         li.onclick = () => openStudentDetail(stu);
         list.appendChild(li);
     });
 }
 
-document.getElementById("studentSearchHeader")
-    .addEventListener("input", renderStudentList);
+document.getElementById("studentSearchHeader").addEventListener("input", renderStudentList);
 
-
-// ----------------------
-// STUDENT DETAIL FUNCTIONS
-// ----------------------
 function openStudentDetail(student) {
     selectedStudent = student;
 
     document.getElementById("studentDetailPanel").classList.remove("hidden");
     document.getElementById("studentsPanel").classList.add("hidden");
+    document.getElementById("notesPanel").classList.add("hidden");
 
     document.getElementById("studentName").textContent = student.name;
     document.getElementById("studentEmail").textContent = student.email;
-
-    renderNotes();
 }
 
 function closeStudentDetail() {
     document.getElementById("studentDetailPanel").classList.add("hidden");
 }
 
-
-// ----------------------
 // NOTES
-// ----------------------
-function renderNotes() {
-    let history = document.getElementById("notesHistory");
-    history.innerHTML = "";
+function saveNote() {
+    let text = document.getElementById("newNote").value.trim();
+    if (!text) return;
 
-    if (selectedStudent.notes.length === 0) {
-        history.innerHTML = "<li>No notes yet.</li>";
+    notes.push(text);
+    document.getElementById("newNote").value = "";
+
+    localStorage.setItem("notesData", JSON.stringify(notes));
+    loadNotes();
+}
+
+function loadNotes() {
+    let list = document.getElementById("notesHistory");
+    list.innerHTML = "";
+
+    if (notes.length === 0) {
+        list.innerHTML = "<li>No notes yet.</li>";
         return;
     }
 
-    selectedStudent.notes.forEach(n => {
+    notes.forEach(n => {
         let li = document.createElement("li");
         li.textContent = n;
-        history.appendChild(li);
+        list.appendChild(li);
     });
 }
 
-function saveNote() {
-    let text = document.getElementById("newNote").value.trim();
-    if (text === "") return;
-
-    selectedStudent.notes.push(text);
-    document.getElementById("newNote").value = "";
-
-    saveNotesToLocalStorage();
-    renderNotes();
-}
-
-function saveNotesToLocalStorage() {
-    let storage = {};
-    students.forEach(s => storage[s.email] = s.notes);
-    localStorage.setItem("studentNotes", JSON.stringify(storage));
-}
-
-
-// ----------------------
-// CALENDAR
-// ----------------------
 function openCalendar() {
-    alert("Calendar feature will open here.");
+    alert("Calendar will open here.");
 }
