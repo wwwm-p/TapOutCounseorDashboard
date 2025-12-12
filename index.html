@@ -5,114 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TapOut! - Counselor Dashboard</title>
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* SIMPLE MODAL */
-        .modal-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.55);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 50;
-        }
-        .modal-box {
-            background: #fff;
-            width: 480px;
-            padding: 25px;
-            border-radius: 8px;
-            max-height: 80vh;
-            overflow-y: auto;
-            border: 2px solid #d0d0d0;
-        }
-        .modal-box h2 {
-            margin-bottom: 15px;
-        }
-        .student-card {
-            padding: 12px;
-            background: #f7f7f7;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 12px;
-        }
-        .student-card h3 {
-            font-size: 18px;
-            margin-bottom: 6px;
-        }
-        .student-card p {
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #555;
-        }
-        .notes-area {
-            width: 100%;
-            height: 70px;
-            margin-top: 8px;
-            padding: 8px;
-            border: 1px solid #bbb;
-            border-radius: 5px;
-        }
-        .close-btn {
-            margin-top: 10px;
-            padding: 10px 15px;
-            background: #d0d0d0;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 
 <body>
 
     <!-- HEADER -->
-    <header class="main-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <header class="main-header">
         <h1>TapOut! - Counselor Dashboard</h1>
 
-        <div style="display: flex; gap: 12px;">
-            <button class="btn" id="openCalendar">Open Calendar</button>
-            <button class="btn" id="studentsBtn">Students</button>
-            <button class="btn" id="signIn">Sign In</button>
+        <div class="header-right">
+            <input type="text" id="studentSearchHeader" placeholder="Search students...">
+
+            <button class="btn" onclick="openCalendar()">Open Calendar</button>
+
+            <button class="btn" onclick="toggleStudentsPanel()">Students</button>
+
+            <button class="btn">Sign In</button>
         </div>
     </header>
 
-    <!-- MAIN DASHBOARD -->
-    <div class="dashboard" style="padding: 20px; height: calc(100vh - 72px);">
+    <!-- STUDENT PANEL -->
+    <div id="studentsPanel" class="students-panel hidden">
+        <h2>Assigned Students</h2>
 
-        <div class="urgency-row" id="crisisRow">
-            <div class="face red-face"><div class="eyes"></div><div class="mouth"></div></div>
+        <div class="student-controls">
+            <label>Sort:</label>
+            <select id="sortOption" onchange="renderStudentList()">
+                <option value="alpha">Alphabetical</option>
+                <option value="grade">Grade Level</option>
+            </select>
         </div>
 
-        <div class="urgency-row" id="moderateRow">
-            <div class="face orange-face"><div class="eyes"></div><div class="mouth"></div></div>
+        <ul id="studentList"></ul>
+    </div>
+
+    <!-- STUDENT DETAILS PANEL -->
+    <div id="studentDetailPanel" class="student-detail hidden">
+        <button class="btn small-btn" onclick="closeStudentDetail()">Back</button>
+
+        <h2 id="studentName"></h2>
+        <p id="studentEmail"></p>
+
+        <h3>Notes History</h3>
+        <ul id="notesHistory"></ul>
+
+        <textarea id="newNote" placeholder="Write a new note..."></textarea>
+        <button class="btn" onclick="saveNote()">Save Note</button>
+
+        <h3>Appointment History</h3>
+        <ul id="appointmentHistory">
+            <li>No appointments recorded.</li>
+        </ul>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard">
+
+        <div class="urgency-row">
+            <div class="face red-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
+            </div>
         </div>
 
-        <div class="urgency-row" id="mildRow">
-            <div class="face yellow-face"><div class="eyes"></div><div class="mouth"></div></div>
+        <div class="urgency-row">
+            <div class="face orange-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
+            </div>
         </div>
 
-        <div class="urgency-row" id="unurgentRow">
-            <div class="face green-face"><div class="eyes"></div><div class="mouth"></div></div>
+        <div class="urgency-row">
+            <div class="face yellow-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
+            </div>
+        </div>
+
+        <div class="urgency-row">
+            <div class="face green-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
+            </div>
         </div>
 
     </div>
 
-    <!-- STUDENTS MODAL -->
-    <div class="modal-bg" id="studentsModal">
-        <div class="modal-box">
-            <h2>Assigned Students</h2>
-
-            <div id="studentList"></div>
-
-            <button class="close-btn" id="closeStudents">Close</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>
