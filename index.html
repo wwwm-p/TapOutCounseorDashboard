@@ -10,61 +10,54 @@
 <body>
 
     <!-- HEADER -->
-    <header class="main-header">
+    <header class="main-header" style="display: flex; justify-content: space-between; align-items: center;">
         <h1>TapOut! - Counselor Dashboard</h1>
+
+        <div style="display: flex; gap: 12px;">
+            <button class="btn" id="openCalendar">Open Calendar</button>
+            <button class="btn" id="signIn">Sign In</button>
+        </div>
     </header>
 
-    <!-- LAYOUT -->
-    <div class="container">
+    <!-- MAIN DASHBOARD (full width now) -->
+    <div class="dashboard" style="padding: 20px; height: calc(100vh - 72px);">
 
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <div class="top-bar">
-                <button class="btn" id="openCalendar">Open Calendar</button>
-                <button class="btn" id="signIn">Sign In</button>
+        <!-- RED - CRISIS -->
+        <div class="urgency-row" id="crisisRow">
+            <h2 style="margin-left: 20px;">Crisis</h2>
+            <div class="face red-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
             </div>
-        </aside>
+        </div>
 
-        <!-- DASHBOARD AREA -->
-        <section class="dashboard">
-
-            <!-- RED - CRISIS -->
-            <div class="urgency-row" id="crisisRow">
-                <h2 style="margin-left: 20px;">Crisis</h2>
-                <div class="face red-face">
-                    <div class="eyes"></div>
-                    <div class="mouth"></div>
-                </div>
+        <!-- ORANGE - MODERATE -->
+        <div class="urgency-row" id="moderateRow">
+            <h2 style="margin-left: 20px;">Moderate</h2>
+            <div class="face orange-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
             </div>
+        </div>
 
-            <!-- ORANGE - MODERATE -->
-            <div class="urgency-row" id="moderateRow">
-                <h2 style="margin-left: 20px;">Moderate</h2>
-                <div class="face orange-face">
-                    <div class="eyes"></div>
-                    <div class="mouth"></div>
-                </div>
+        <!-- YELLOW - MILD -->
+        <div class="urgency-row" id="mildRow">
+            <h2 style="margin-left: 20px;">Mild</h2>
+            <div class="face yellow-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
             </div>
+        </div>
 
-            <!-- YELLOW - MILD -->
-            <div class="urgency-row" id="mildRow">
-                <h2 style="margin-left: 20px;">Mild</h2>
-                <div class="face yellow-face">
-                    <div class="eyes"></div>
-                    <div class="mouth"></div>
-                </div>
+        <!-- GREEN - UNURGENT -->
+        <div class="urgency-row" id="unurgentRow">
+            <h2 style="margin-left: 20px;">Unurgent</h2>
+            <div class="face green-face">
+                <div class="eyes"></div>
+                <div class="mouth"></div>
             </div>
+        </div>
 
-            <!-- GREEN - UNURGENT -->
-            <div class="urgency-row" id="unurgentRow">
-                <h2 style="margin-left: 20px;">Unurgent</h2>
-                <div class="face green-face">
-                    <div class="eyes"></div>
-                    <div class="mouth"></div>
-                </div>
-            </div>
-
-        </section>
     </div>
 
     <script src="script.js"></script>
