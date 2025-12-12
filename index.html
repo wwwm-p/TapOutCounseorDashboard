@@ -1,78 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TapOut! - Counselor Dashboard</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #FFFCF5; /* Entire page background */
-      color: #333;
-    }
-
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #A7D8FF; /* Light blue header */
-      color: #00344A; /* Darker text for readability */
-      padding: 14px 22px;
-      font-weight: bold;
-    }
-
-    /* Header buttons */
-    .header-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    button {
-      padding: 8px 12px;
-      background-color: #3498db;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #2980b9;
-    }
-
-    /* Main content */
-    main {
-      padding: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TapOut! - Counselor Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header>
-    <h1>TapOut! - Counselor Dashboard</h1>
-    <div class="header-buttons">
-      <button id="openCalendar">Open Calendar</button>
-      <button id="signIn">Sign In</button>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <h1>TapOut! - Counselor Dashboard</h1>
+    </header>
+
+    <!-- LAYOUT -->
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="top-bar">
+                <button class="btn" id="openCalendar">Open Calendar</button>
+                <button class="btn" id="signIn">Sign In</button>
+            </div>
+        </aside>
+
+        <!-- DASHBOARD AREA -->
+        <section class="dashboard">
+
+            <!-- RED - CRISIS -->
+            <div class="urgency-row" id="crisisRow">
+                <h2 style="margin-left: 20px;">Crisis</h2>
+                <div class="face red-face">
+                    <div class="eyes"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+
+            <!-- ORANGE - MODERATE -->
+            <div class="urgency-row" id="moderateRow">
+                <h2 style="margin-left: 20px;">Moderate</h2>
+                <div class="face orange-face">
+                    <div class="eyes"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+
+            <!-- YELLOW - MILD -->
+            <div class="urgency-row" id="mildRow">
+                <h2 style="margin-left: 20px;">Mild</h2>
+                <div class="face yellow-face">
+                    <div class="eyes"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+
+            <!-- GREEN - UNURGENT -->
+            <div class="urgency-row" id="unurgentRow">
+                <h2 style="margin-left: 20px;">Unurgent</h2>
+                <div class="face green-face">
+                    <div class="eyes"></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+
+        </section>
     </div>
-  </header>
 
-  <main>
-    <h2>Welcome to your dashboard</h2>
-    <p>All content is now full width (no sidebar).</p>
-  </main>
+    <script src="script.js"></script>
 
-  <script>
-    document.getElementById('openCalendar').addEventListener('click', function() {
-      alert('Calendar opens!');
-      // Replace with actual calendar functionality
-    });
-
-    document.getElementById('signIn').addEventListener('click', function() {
-      alert('Sign In clicked!');
-      // Replace with actual sign in functionality
-    });
-  </script>
 </body>
 </html>
-
